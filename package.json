@@ -1,0 +1,23 @@
+{
+  "name": "ggr-discordbot",
+  "version": "1.0.0",
+  "description": "The official, experimental bot for GGR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perrymatthew/GGR-DiscordBot.git"
+  },
+  "author": "MrMunchiess",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/perrymatthew/GGR-DiscordBot/issues"
+  },
+  "homepage": "https://github.com/perrymatthew/GGR-DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "dotenv": "^6.0.0"
+  }
+}
