@@ -3,44 +3,61 @@
 require('dotenv').config();
 
 // Import the discord.js module
-const Discord = require('discord.js')
+const Discord = require('discord.js');
+const Commando = require('discord.js-commando');
+const path = require('path');
 
 // Create an instance of Discord that we will use to control the bot
-const bot = new Discord.Client();
+const client = new Commando.Client({
+    commandPrefix: '~',
+    owner: '351799282874974211',
+    disabledEvents: [true]
+});
 
 // Token for your bot, located in the Discord application console - https://discordapp.com/developers/applications/me/
 const token = process.env.BOT_TOKEN;
 
+client.registry
+    .registerDefaultTypes()
+    .registerGroups([
+        ['memes', 'These commands will be used for various memes']
+    ])
+    .registerDefaultGroups()
+    .registerDefaultCommands()
+    .registerCommandsIn(path.join(__dirname, 'commands'));
+
 // Gets called when our bot is successfully logged in and connected
-bot.on('ready', () => {
+client.on('ready', () => {
     console.log('Bot Started and connected to Server');
+    client.user.setActivity('Thot Patrol');
 });
+
+client.login(token);
 
 // Event to listen to messages sent to the server where the bot is located
-bot.on('message', message => {
-    // So the bot doesn't reply to iteself
-    if (message.author.bot) return;
+// client.on('message', message => {
+//     // So the bot doesn't reply to iteself
+//     if (message.author.bot) return;
 
-    // Check if the message starts with the `!` trigger
-    if (message.content.indexOf('~') === 0) {
-        // Get the user's message excluding the `!`
-        var text = message.content.substring(1);
+//     // Check if the message starts with the `~` trigger
+//     if (message.content.indexOf('~') === 0) {
+//         // Get the user's message excluding the `~`
+//         var text = message.content.substring(1);
+//         text.toLowerCase();
 
-        // Reverse the message
-        var reversed = '';
-        var i = text.length;
+//         // Reverse the message
+//         var reversed = '';
+//         var i = text.length;
 
-        while (i > 0) {
-            reversed += text.substring(i - 1, i);
-            i--;
-        }
+//         while (i > 0) {
+//             reversed += text.substring(i - 1, i);
+//             i--;
+//         }
 
-        // Reply to the user's message
-        message.reply(reversed);
-    }
-});
-
-bot.login(token);
+//         // Reply to the user's message
+//         message.reply(reversed);
+//     }
+// });
 
 // Express web app
 
